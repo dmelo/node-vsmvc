@@ -2,7 +2,7 @@
     "name": "vsmvc",
     "description": "A very simples MVC Framework",
     "author": "Diogo Oliveira de Melo <dmelo87@gmail.com>",
-    "version": "0.1",
+    "version": "1.0",
     "dependencies": {
         "formidable": ">= 1.0.11"
     },
