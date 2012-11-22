@@ -1,7 +1,6 @@
 "use strict";
 
-var http = require('http'),
-    url = require('url'),
+var url = require('url'),
     path = require('path'),
     fs = require('fs'),
     formidable = require('formidable'),
@@ -73,7 +72,7 @@ function route(request, response, pathname) {
     return ret;
 }
 
-http.createServer(function (request, response) {
+function bootstrap(request, resposne) {
     request.pause();
     var pathname = url.parse(request.url).pathname,
         filePath;
@@ -122,6 +121,4 @@ http.createServer(function (request, response) {
             response.end();
         }
     });
-}).listen(port);
-
-console.log('Server has started on port ' + port);
+};
