@@ -1,12 +1,12 @@
 "use strict";
 
-var url = require('url'),
-    path = require('path'),
-    fs = require('fs'),
-    formidable = require('formidable'),
-    layout = require('./layout'),
-    port = 'undefined' !== typeof process.argv[2] ? parseInt(process.argv[2]) : 8888,
-    st = require('./models/status');
+var url,
+    path,
+    fs,
+    formidable,
+    layout,
+    st,
+    basedir;
 
 function callbackRoute(content, request, response) {
     var isAjax = 'XMLHttpRequest' === request.headers['x-requested-with'];
@@ -46,7 +46,7 @@ function route(request, response, pathname) {
         }).on('end', function () {
             try {
                 console.log('upload completed');
-                controller = require('./controllers/' + pathname);
+                controller = require(basedir + '/controllers/' + pathname);
                 controller.getResponse(get, post, files, request, response, callbackRoute);
                 ret = true;
             } catch (err) {
@@ -60,7 +60,7 @@ function route(request, response, pathname) {
     } else {
         console.log('handling ' + pathname);
         try {
-            controller = require('./controllers/' + pathname);
+            controller = require(basedir + '/controllers/' + pathname);
             console.log('handling 2 ' + pathname);
             controller.getResponse(get, post, files, request, response, callbackRoute, st);
             ret = true;
@@ -72,17 +72,26 @@ function route(request, response, pathname) {
     return ret;
 }
 
-function bootstrap(request, resposne) {
+exports.bootstrap = function(request, response, rootdir) {
     request.pause();
+    url = require('url');
     var pathname = url.parse(request.url).pathname,
         filePath;
+
+    path = require('path');
+    fs = require('fs');
+    formidable = require('formidable');
+    layout = require(rootdir + '/layout');
+    st = require(rootdir + '/models/status');
+    basedir = rootdir;
+
 
     if ('/' === pathname || '' === pathname) {
         pathname = '/index';
     }
 
     console.log("request for " + pathname + " received.");
-    filePath = "public/" + pathname;
+    filePath = basedir + "/public/" + pathname;
 
     fs.exists(filePath, function (exists) {
         if (exists) {
