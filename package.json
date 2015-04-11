@@ -1,16 +1,28 @@
 {
-    "name": "vsmvc",
-    "description": "A very simples MVC Framework",
-    "author": "Diogo Oliveira de Melo <dmelo87@gmail.com>",
-    "version": "0.1.0",
-    "dependencies": {
-        "formidable": ">= 1.0.11"
-    },
-    "directories": {
-        "lib": "./"
-    },
-    "main": "./server.js",
-    "engine": {
-        "node": "*"
-    }
+  "name": "vsmvc",
+  "description": "A very simples MVC Framework",
+  "author": {
+    "name": "Diogo Oliveira de Melo",
+    "email": "dmelo87@gmail.com"
+  },
+  "version": "0.1.0",
+  "dependencies": {
+    "formidable": ">= 1.0.11"
+  },
+  "directories": {
+    "lib": "./"
+  },
+  "main": "./server.js",
+  "engine": {
+    "node": "*"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "readme": "VSMVC\n\nVery Simple MVC for node offers a very lightweight MVC framework.\n",
+  "_id": "vsmvc@0.1.0",
+  "dist": {
+    "shasum": "7d6773cbd0c8643e627a1c625429b3e66a22131f"
+  },
+  "_from": "git://github.com/dmelo/node-vsmvc.git"
 }
